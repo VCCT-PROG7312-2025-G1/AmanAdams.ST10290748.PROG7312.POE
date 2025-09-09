@@ -1,0 +1,429 @@
+﻿@{
+    ViewData["Title"] = "Report an Issue";
+}
+
+<div class="container">
+    <h3>Report an Issue</h3>
+    <hr />
+
+  
+
+    <form asp-action="Report" asp-controller="Issues" method="post" enctype="multipart/form-data" class="report-form">
+        <label for="location"><b>Location</b></label>
+        <input type="text" name="location" id="location" placeholder="Enter the location" required />
+
+        <label for="category"><b>Category</b></label>
+        <select name="category" id="category" required>
+            <option value="">-- Select Category --</option>
+            <option value="Roads">Roads</option>
+            <option value="Sanitation">Sanitation</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Safety">Safety</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="description"><b>Description</b></label>
+        <textarea name="description" id="description" rows="5" placeholder="Provide a detailed description of the issue..."></textarea>
+
+        <label for="attachment"><b>Attach File</b></label>
+        <input type="file" name="attachment" id="attachment" />
+
+        <!-- Progress Bar -->
+        <label for="progress bar"><b>Progress Bar</b></label>
+        <div class="progress-container">
+           
+            <div id="progress-bar"></div>
+        </div>
+        <p id="progress-text">0% Complete</p>
+
+        <div class="form-buttons">
+            <button type="submit" class="action-btn submit-btn">Submit</button>
+            <a asp-controller="Home" asp-action="Index">
+                <button type="button" class="action-btn cancel-btn">Back to Main Menu</button>
+            </a>
+        </div>
+    </form>
+</div>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 700px;
+        margin: auto;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Progress Bar */
+    .progress-container {
+        width: 100%;
+        background: #f1f1f1;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        height: 25px;
+        overflow: hidden;
+    }
+
+    #progress-bar {
+        height: 100%;
+        width: 0;
+        background-color: cadetblue;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 25px;
+        color: white;
+        font-weight: bold;
+        transition: width 0.3s ease-in-out;
+    }
+
+    #progress-text {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 20px;
+        text-align: right;
+    }
+
+    .report-form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+    .report-form input[type=text],
+    .report-form input[type=file],
+    .report-form select,
+    .report-form textarea {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: #f9f9f9;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+        .report-form input:focus,
+        .report-form select:focus,
+        .report-form textarea:focus {
+            border-color: cadetblue;
+            background: #eef7f7;
+            outline: none;
+        }
+
+    /* Flexbox for buttons */
+    .form-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .action-btn {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, opacity 0.2s;
+        color: #fff;
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+        .action-btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+    .submit-btn {
+        background-color: cadetblue;
+    }
+
+    .cancel-btn {
+        background-color: lightslategrey;
+    }
+
+    .report-form textarea {
+        resize: none;
+    }
+</style>
+
+<script>
+    const inputs = document.querySelectorAll("#location, #category, #description, #attachment");
+    const progressBar = document.getElementById("progress-bar");
+    const progressText = document.getElementById("progress-text");
+
+    function updateProgress() {
+        let filled = 0;
+        inputs.forEach(input => {
+            if (input.type === "file") {
+                if (input.files.length > 0) filled++;
+            } else if (input.value.trim() !== "") {
+                filled++;
+            }
+        });
+
+        const total = inputs.length;
+        const percent = Math.round((filled / total) * 100);
+        progressBar.style.width = percent + "%";
+        progressText.innerText = percent + "% Complete";
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener("input", updateProgress);
+        input.addEventListener("change", updateProgress);
+    });
+</script>
+
+
+@* @{
+    ViewData["Title"] = "Report an Issue";
+}
+
+<div class="container">
+    <h3>Report an Issue</h3>
+    <hr />
+
+    <form asp-action="Report" asp-controller="Issues" method="post" enctype="multipart/form-data" class="report-form">
+        <label for="location"><b>Location</b></label>
+        <input type="text" name="location" placeholder="Enter the location" required />
+
+        <label for="category"><b>Category</b></label>
+        <select name="category" required>
+            <option value="Roads">Roads</option>
+            <option value="Sanitation">Sanitation</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Safety">Safety</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="description"><b>Description</b></label>
+        <textarea name="description" rows="5" placeholder="Provide a detailed description of the issue..."></textarea>
+
+        <label for="attachment"><b>Attach File</b></label>
+        <input type="file" name="attachment" />
+
+
+
+        <div class="form-buttons">
+            <button type="submit" class="action-btn submit-btn">Submit</button>
+            <a asp-controller="Home" asp-action="Index">
+                <button type="button" class="action-btn cancel-btn">Back to Main Menu</button>
+            </a>
+        </div>
+    </form>
+</div>
+
+
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 700px;
+        margin: auto;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .report-form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+    }
+
+    .report-form input[type=text],
+    .report-form input[type=file],
+    .report-form select,
+    .report-form textarea {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: #f9f9f9;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+        .report-form input:focus,
+        .report-form select:focus,
+        .report-form textarea:focus {
+            border-color: cadetblue;
+            background: #eef7f7;
+            outline: none;
+        }
+
+    /* Flexbox for buttons */
+    .form-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .action-btn {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, opacity 0.2s;
+        color: #fff;
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+        .action-btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+    .submit-btn {
+        background-color: cadetblue;
+    }
+
+    .cancel-btn {
+        background-color: lightslategrey;
+    }
+
+    .report-form textarea {
+        resize: none;
+    }
+</style> *@
+
+
+@* @{
+    ViewData["Title"] = "Report an Issue";
+}
+
+<div class="container">
+    <h3>Report an Issue</h3>
+    <hr />
+
+    <form asp-action="Report" asp-controller="Issues" method="post" enctype="multipart/form-data">
+        <label for="location"><b>Location</b></label>
+        <input type="text" name="location" placeholder="Enter the location" required />
+
+        <label for="category"><b>Category</b></label>
+        <select name="category" required>
+            <option value="Roads">Roads</option>
+            <option value="Sanitation">Sanitation</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Safety">Safety</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="description"><b>Description</b></label>
+        <textarea name="description" rows="5" style="width:100%; padding:15px; margin-bottom:25px;"></textarea>
+
+        <label for="attachment"><b>Attach File</b></label>
+        <input type="file" name="attachment" />
+
+        <div class="clearfix">
+            <button type="submit" class="signupbtn">Submit</button>
+            <a asp-controller="Home" asp-action="Index">
+                <button type="button" class="cancelbtn">Back to Main Menu</button>
+            </a>
+        </div>
+    </form>
+</div>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+    /* Full-width input fields */
+
+    input[type=text], input[type=password], input[type=file] {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0 25px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+    /* Set a style for all buttons */
+
+    button {
+        background-color: cadetblue;
+        color: white;
+        padding: 14px 20px;
+        margin: 20px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+        button:hover {
+            opacity: 1;
+        }
+    /* Extra styles for the cancel button */
+
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: lightslategrey;
+    }
+    /* Float cancel and signup buttons and add an equal width */
+
+    .cancelbtn, .signupbtn {
+        float: left;
+        width: 50%;
+    }
+    /* Add padding to container elements */
+
+    .container {
+        padding: 20px;
+    }
+    /* Clear floats */
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+ *@
