@@ -1,5 +1,10 @@
 ﻿using System.Collections;
 
+// Aman Adams
+// ST10290748
+// PROG7312
+// POE PART 1
+
 namespace AmanAdams.ST10290748.PROG7312.POE.Models
 {
     public class IssueRepositoryModel
@@ -8,7 +13,7 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
 
         public void AddIssue(IssueModel issue)
         {
-            _issues[issue.Id] = issue;   // store issue with ID as key
+            _issues[issue.Id] = issue;  
         }
 
         public IssueModel? GetIssue(Guid id)
