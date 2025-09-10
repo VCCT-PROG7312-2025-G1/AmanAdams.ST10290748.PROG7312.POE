@@ -32,37 +32,37 @@ How to Compile & Run
 
 1. Extract the ZIP  
 
-Unzip the project folder (AmanAdams.ST10290748.PROG7312.POE.zip).  
+- Unzip the project folder (AmanAdams.ST10290748.PROG7312.POE.zip).  
 
-Confirm that the folder structure remains unchanged.  
+- Confirm that the folder structure remains unchanged.  
 
 
 2. Open in Visual Studio  
 
-Double-click the .sln file (AmanAdams.ST10290748.PROG7312.POE.sln).  
+- Double-click the .sln file (AmanAdams.ST10290748.PROG7312.POE.sln).  
 
-This action will launch the complete solution in Visual Studio.  
+- This action will launch the complete solution in Visual Studio.  
 
 
 3. Restore Dependencies  
 
-NuGet packages will be restored automatically by Visual Studio.  
+- NuGet packages will be restored automatically by Visual Studio.  
 
-If prompted, agree to install the necessary packages.  
+- If prompted, agree to install the necessary packages.  
 
 
 4. Set Startup Project  
 
-In Solution Explorer, right-click on the project AmanAdams.ST10290748.PROG7312.POE.  
+- In Solution Explorer, right-click on the project AmanAdams.ST10290748.PROG7312.POE.  
 
-Choose Set as Startup Project.  
+- Choose Set as Startup Project.  
 
 
 5. Run the Application  
 
-Press F5 (Debug → Start Debugging).  
+- Press F5 (Debug → Start Debugging).  
 
-The application will compile and run at https://localhost:xxxx (port designated by Visual Studio).  
+- The application will compile and run at https://localhost:xxxx (port designated by Visual Studio).  
 
 
 How to Use the Application:  
