@@ -1,129 +1,101 @@
-Municipal Services Application-PROG7312 POE Part 1  
+## Municipal Services Application for South Africa
+### Programming 3B Part 2
+The Municipal Services Application is designed to streamline citizen interaction with municipal services in South Africa.
 
-Overview  
+### It allows users to:
+**1)	Report issues (Part 1)** 
+- Input a location.
+- Choose a category (Roads, Sanitation, Utilities, Safety, Other).
+- Enter a description.
+- You may optionally upload a file (photo or document).
+- A progress bar will update as you fill in the fields.
+- Click Submit to report the issue.
 
+**2)	View local events and announcements (Part 2)**
+- Adding and displaying local events and announcements.
+- Searching and filtering by category and date.
+- Sorting events by priority (date order).
+- Generating recommendations based on user search patterns.
+- Authentication for Admin/Employee login before adding events. 
 
-This project is included in the PROG7312 Portfolio of Evidence (Part 1).  
-It is a C# ASP.NET Core MVC application designed for citizens to:  
+**3)	Track service-request status (to be implemented in Part 3)**
+This version focuses on collaboration and advanced data structures to manage and recommend local events efficiently.
 
-- Report municipal problems (with or without attachments).
+### Prerequisites
+**Before compiling or running, ensure you have:**
+1.	Visual Studio 2022 (or later) installed
+   
+2. Workload: “.NET Desktop Development”
+   - .NET Framework 4.7.2 or later
+3.	A Windows PC environment
+   
+**How to Compile the Application**
+1. Clone the Repository
+Open your terminal or Git Bash and run:
+git clone https://github.com/<your-username>/<your-repo-name>.git
+Alternatively, download the project as a ZIP file and extract it.
+
+1.	Open the Project
+- Launch Visual Studio 2022 or later
+- Select File > Open > Project/Solution
+- Browse to the folder and open the solution file
+- MunicipalServicesApp.sln
+
+3.	Restore Dependencies
+Visual Studio automatically restores required NuGet Packages
+
+5.	Build the Project
+-	Choose Build > Build Solution
+-	Wait until the Build succeeded message appears in the Output window
+
+**How to Run the Application**
+1.	In Visual Studio, press the play button run the program.
+2.	The Main Menu opens.
+   
+**How to Use the Software**
+
+Main Menu
+- Displays the three core features. And a login for the Staff/Employees.
+- Users should only be able to Report Issues, view and filter Local Events & Announcements by category or date and view recommended events. 
+- Admin, only once logged in, should be able to view the report issues page, add, view and filter Local Events & Announcements and view recommended events.
   
-- View placeholders for future features, such as Local Events and Service Request Status.  
-
-- Navigate through an intuitive main menu that includes onboarding assistance (progress bar and descriptions).  
-
-- All information is stored in Hashtables rather than arrays/lists, showcasing knowledge of data structures.  
-
-
-Requirements  
-
-Make sure you have the following before running the project:  
-
-
-- Visual Studio 2022 or a later version.  
-
-- .NET 8 SDK (already set in this project).  
-
-- Git (only necessary if cloning from GitHub; not required if you received a ZIP file).  
-
-
-How to Compile & Run 
-
-
-1. Extract the ZIP  
-
-- Unzip the project folder (AmanAdams.ST10290748.PROG7312.POE.zip).  
-
-- Confirm that the folder structure remains unchanged.  
-
-
-2. Open in Visual Studio  
-
-- Double-click the .sln file (AmanAdams.ST10290748.PROG7312.POE.sln).  
-
-- This action will launch the complete solution in Visual Studio.  
-
-
-3. Restore Dependencies  
-
-- NuGet packages will be restored automatically by Visual Studio.  
-
-- If prompted, agree to install the necessary packages.  
-
-
-4. Set Startup Project  
-
-- In Solution Explorer, right-click on the project AmanAdams.ST10290748.PROG7312.POE.  
-
-- Choose Set as Startup Project.  
-
-
-5. Run the Application  
-
-- Press F5 (Debug → Start Debugging).  
-
-- The application will compile and run at https://localhost:xxxx (port designated by Visual Studio).  
-
-
-How to Use the Application:  
-
-
-Main Menu  
-
-Shows three buttons:  
-
-- Report Issues (active)  
-
-- Local Events (Coming Soon)  
-
-- Service Request Status (Coming Soon)  
-
-
-Report an Issue  
-
-1. Input a location.  
-
-2. Choose a category (Roads, Sanitation, Utilities, Safety, Other).  
-
-3. Enter a description.  
-
-4. You may optionally upload a file (photo or document).  
-
-5. A progress bar will update as you fill in the fields.  
-
-6. Click Submit to report the issue.  
-
-
-Success Page  
-
-- Following submission, a confirmation message will appear.  
-
-- A button provides the option to return to the main menu.  
-
-
-Navigation  
-
-- The navigation bar is visible but inactive.  
-
-- You must utilize the main menu buttons for navigation.  
-
-
-File Uploads  
-
-- Files uploaded are stored in wwwroot/uploads/.  
-
-- The file path is recorded in the issue record (using Hashtable).  
-
-
-Technical Notes  
-
-- The application implements Hashtables in Models (IssueRepositoryModel).  
-
-- No external database is necessary (all information is kept in memory).  
-
-- Controllers do not contain business logic, which is managed by Service/Repository models.  
-
-
-Youtube Video Link: 
-
-https://youtu.be/BIeDD951GSw?si=WwpisYQP0NehK05T
+- Set Credentials:
+   -	Username: admin
+   -	Password: password123
+              OR 
+   -	Username: employee
+   -	Password: employee123
+ 
+
+Report Issues
+(From Part 1)
+- Allows users to submit municipal issues.
+- Fill in location, category, and description.
+-	Attach an image or document and submit.
+-	Confirmation messages show on successful submission.
+
+  
+Local Events and Announcements
+(New for Part 2)
+-	Displays a list of upcoming local events in an organised, card-style layout.
+-	Admin: Add a title, choose if it’s an Announcement or Event, description, category, date and a photo (optional- if a photo is not added a default image will be used.)
+-	Search Bar: Filter events by category or date.
+  
+-	Data Structures Used:
+  -	SortedDictionary - sort events by date
+  -	Dictionary - store event details for quick lookup
+  -	HashSet - maintain unique categories and dates
+  -	PriorityQueue - manage recent events by date
+  -	HashTable- Record search frequency
+    
+-	Recommendation Feature: After a search, the system suggests related events based on user preferences using frequency tracking.
+  
+- Technologies Used
+- C# (.NET 8 / .NET Core MVC Framework)
+-	Razor Views / HTML / CSS / JavaScript
+-	Entity Framework Core (Database context)
+-	SQLite LocalDB (for data storage)
+-	Visual Studio 2022 
+
+### YouTube Video:
+https://www.youtube.com/watch?v=wd0GbxzC7qg
