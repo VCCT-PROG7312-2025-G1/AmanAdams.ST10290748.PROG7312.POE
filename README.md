@@ -30,12 +30,12 @@ This version focuses on collaboration and advanced data structures to manage and
 3.	A Windows PC environment
    
 **How to Compile the Application**
+
 1. Clone the Repository
-Open your terminal or Git Bash and run:
-git clone https://github.com/<your-username>/<your-repo-name>.git
+
 Alternatively, download the project as a ZIP file and extract it.
 
-1.	Open the Project
+2.	Open the Project
 - Launch Visual Studio 2022 or later
 - Select File > Open > Project/Solution
 - Browse to the folder and open the solution file
@@ -55,8 +55,11 @@ Visual Studio automatically restores required NuGet Packages
 **How to Use the Software**
 
 ***Main Menu***
+
 Displays the three core features. And a login for the Staff/Employees.
+
 Users should only be able to Report Issues, view and filter Local Events & Announcements by category or date and view recommended events. 
+
 Admin, only once logged in, should be able to view the report issues page, add, view and filter Local Events & Announcements and view recommended events.
   
 Set Credentials:
@@ -67,6 +70,7 @@ Set Credentials:
    -	Password: employee123
  
 ***Report Issues***
+
 (From Part 1)
 - Allows users to submit municipal issues.
 - Fill in location, category, and description.
@@ -75,9 +79,13 @@ Set Credentials:
 
   
 ***Local Events and Announcements***
+
 (New for Part 2)
+
 Displays a list of upcoming local events in an organised, card-style layout.
+
 Admin: Add a title, choose if it’s an Announcement or Event, description, category, date and a photo (optional- if a photo is not added a default image will be used.)
+
 Search Bar: Filter events by category or date.
   
 Data Structures Used:
@@ -87,7 +95,9 @@ Data Structures Used:
   -	PriorityQueue - manage recent events by date
   -	HashTable- Record search frequency
     
-Recommendation Feature: After a search, the system suggests related events based on user preferences using frequency tracking.
+Recommendation Feature: 
+
+After a search, the system suggests related events based on user preferences using frequency tracking.
   
 ## Technologies Used
 - C# (.NET 8 / .NET Core MVC Framework)
