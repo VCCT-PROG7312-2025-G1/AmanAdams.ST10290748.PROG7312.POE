@@ -8,7 +8,7 @@
     <p>Efficiently managing essential services in one place!</p>
 </div>
 
-<!-- Cards Section -->
+<!-- Main Cards Section -->
 <div class="menu-cards">
     <!-- Report Issues -->
     <div class="menu-card">
@@ -30,6 +30,14 @@
         <p>Check the progress of your submitted issues and service requests in real time.</p>
         <a asp-controller="Status" asp-action="Status" class="card-btn">Check Status</a>
     </div>
+</div>
+
+<!-- Login Section -->
+<div class="login-section">
+    <h2>Admin Access</h2>
+    <p>Authorized personnel can log in below to manage reports and monitor service operations.</p>
+
+    <a asp-controller="Account" asp-action="Login" class="login-btn">Login</a>
 </div>
 
 <style>
@@ -78,7 +86,12 @@
         min-width: 250px;
         max-width: 320px;
         text-align: center;
+        transition: transform 0.2s ease-in-out;
     }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
 
         .menu-card h3 {
             margin-bottom: 15px;
@@ -97,7 +110,6 @@
         background-color: cadetblue;
         color: white;
         padding: 12px 20px;
-        border: none;
         border-radius: 10px;
         font-weight: bold;
         text-decoration: none;
@@ -108,168 +120,48 @@
             opacity: 0.9;
             transform: scale(1.05);
         }
-</style>
 
-
-
-@* @{
-    ViewData["Title"] = "Main Menu";
-}
-
-<div class="container">
-    <h3>Main Menu</h3>
-    <hr />
-
-    <div class="menu-buttons">
-        <form asp-controller="Issues" asp-action="Report" method="get">
-            <button type="submit" class="menu-btn">Report Issues</button>
-        </form>
-
-        <button disabled class="menu-btn">Local Events & Announcements (Coming Soon)</button>
-        <button disabled class="menu-btn">Service Request Status (Coming Soon)</button>
-    </div>
-</div>
-
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
+    /* Disable links visually */
+    a[disabled] {
+        pointer-events: none;
+        opacity: 0.6;
+        cursor: not-allowed;
     }
 
-    * {
-        box-sizing: border-box;
-    }
-
-    hr {
-        border: 1px solid #f1f1f1;
-        margin-bottom: 25px;
-    }
-
-    /* Flex container for menu buttons */
-    .menu-buttons {
-        display: flex;
-        gap: 20px; /* space between buttons */
-        flex-wrap: wrap; /* wrap if screen too small */
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    /* Button style */
-    .menu-btn {
-        background-color: cadetblue;
-        color: white;
-        padding: 40px 40px; /* bigger padding = square card look */
-        border: none;
-        border-radius: 15px; /* rounded corners */
-        cursor: pointer;
-        min-width: 200px; /* ensures square-ish shape */
+    /* Login Section */
+    .login-section {
         text-align: center;
-        font-size: 16px;
+        background: #f8f8f8;
+        border-top: 2px solid #ddd;
+        margin-top: 60px;
+        padding: 40px 20px;
+        border-radius: 20px 20px 0 0;
+    }
+
+        .login-section h2 {
+            color: #2F4F4F;
+            margin-bottom: 10px;
+        }
+
+        .login-section p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+    .login-btn {
+        display: inline-block;
+        background-color: #2F4F4F;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 10px;
         font-weight: bold;
-        box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+        text-decoration: none;
         transition: transform 0.2s, opacity 0.2s;
     }
 
-        .menu-btn:hover {
-            opacity: 1;
+        .login-btn:hover {
+            background-color: #3d6d6d;
             transform: scale(1.05);
         }
-
-        .menu-btn:disabled {
-            background-color: lightslategrey;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-    .container {
-        padding: 20px;
-        text-align: center;
-    }
 </style>
- *@
-
-@* @{
-    ViewData["Title"] = "Main Menu";
-}
-
-<div class="container">
-    <h3>Main Menu</h3>
-    <hr />
-
-    <form asp-controller="Issues" asp-action="Report" method="get">
-        <button type="submit">Report Issues</button>
-    </form>
-
-    <button disabled>Local Events & Announcements (Coming Soon)</button>
-    <button disabled>Service Request Status (Coming Soon)</button>
-</div>
-
-
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-    /* Full-width input fields */
-
-    input[type=text], input[type=password], input[type=file] {
-        width: 100%;
-        padding: 15px;
-        margin: 10px 0 25px 0;
-        display: inline-block;
-        border: none;
-        background: #f1f1f1;
-    }
-
-        input[type=text]:focus, input[type=password]:focus {
-            background-color: #ddd;
-            outline: none;
-        }
-
-    hr {
-        border: 1px solid #f1f1f1;
-        margin-bottom: 25px;
-    }
-    /* Set a style for all buttons */
-
-    button {
-        background-color: cadetblue;
-        color: white;
-        padding: 14px 20px;
-        margin: 20px 0;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        opacity: 0.9;
-    }
-
-        button:hover {
-            opacity: 1;
-        }
-    /* Extra styles for the cancel button */
-
-    .cancelbtn {
-        padding: 14px 20px;
-        background-color: lightslategrey;
-    }
-    /* Float cancel and signup buttons and add an equal width */
-
-    .cancelbtn, .signupbtn {
-        float: left;
-        width: 50%;
-    }
-    /* Add padding to container elements */
-
-    .container {
-        padding: 20px;
-    }
-    /* Clear floats */
-
-    .clearfix::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-</style> *@

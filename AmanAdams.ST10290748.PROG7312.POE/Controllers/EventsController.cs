@@ -1,20 +1,99 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AmanAdams.ST10290748.PROG7312.POE.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Linq;
 
 // Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 1 
+// POE PART 2
 
-namespace AmanAdams.ST10290748.PROG7312.POE.Controllers
+public class EventsController : Controller
 {
-    public class EventsController : Controller
+    private readonly EventServiceModel _service;
+
+    public EventsController(EventServiceModel service)
     {
-        
-            public IActionResult Events()
-            {
-                ViewData["Title"] = "Local Events And Announcements";
-                return View();
-            }
-        
+        _service = service;
     }
+
+   
+    public IActionResult Events()
+    {
+        var allEvents = _service.GetAllEvents();
+
+        //Default recommendations (e.g., most recent or featured)
+        var recommendations = allEvents
+            .OrderByDescending(e => e.EventDate)
+            .Take(4) 
+            .ToList();
+
+        var viewModel = new EventViewModel
+        {
+            Events = allEvents,
+            EventsByCategory = _service.GetEventsByCategory(),
+            EventsByDate = _service.GetEventsByDate(),
+            UniqueCategories = _service.GetUniqueCategories(),
+            UniqueEventDates = _service.GetUniqueDates(),
+            PriorityEvents = _service.GetPriorityQueue()
+        };
+
+        ViewBag.Recommendations = recommendations;
+
+        return View(viewModel);
+    }
+
+    //Add a new event
+    [HttpPost]
+    public async Task<IActionResult> AddEvent(Event newEvent, IFormFile Photo)
+    {
+        if (Photo != null && Photo.Length > 0)
+        {
+            var fileName = Path.GetFileName(Photo.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await Photo.CopyToAsync(stream);
+            }
+            newEvent.PhotoPath = "/uploads/" + fileName;
+        }
+        else
+        {
+            newEvent.PhotoPath = "/images/defaultImage.jpg";
+        }
+
+        _service.AddEvent(newEvent);
+
+        TempData["SuccessMessage"] = "Event added!";
+        return RedirectToAction("Events");
+    }
+
+    //Search and show recommendations based on category/date
+    public IActionResult Search(string category, DateTime? eventDate)
+    {
+        var (results, recommendations) = _service.SearchEvents(category, eventDate);
+
+        var viewModel = new EventViewModel
+        {
+            Events = results,
+            EventsByCategory = _service.GetEventsByCategory(),
+            EventsByDate = _service.GetEventsByDate(),
+            UniqueCategories = _service.GetUniqueCategories(),
+            UniqueEventDates = _service.GetUniqueDates(),
+            PriorityEvents = _service.GetPriorityQueue()
+        };
+
+        ViewBag.Recommendations = recommendations;
+
+        if (results.Count == 0)
+            TempData["SearchMessage"] = "No events found for your search.";
+
+        return View("Events", viewModel);
+    }
+
+ 
 }
+
+
+
+

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 // Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 1
+// POE PART 2
 
 public class IssuesController : Controller
 {
