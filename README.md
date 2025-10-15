@@ -54,43 +54,42 @@ Visual Studio automatically restores required NuGet Packages
    
 **How to Use the Software**
 
-Main Menu
-- Displays the three core features. And a login for the Staff/Employees.
-- Users should only be able to Report Issues, view and filter Local Events & Announcements by category or date and view recommended events. 
-- Admin, only once logged in, should be able to view the report issues page, add, view and filter Local Events & Announcements and view recommended events.
+***Main Menu***
+Displays the three core features. And a login for the Staff/Employees.
+Users should only be able to Report Issues, view and filter Local Events & Announcements by category or date and view recommended events. 
+Admin, only once logged in, should be able to view the report issues page, add, view and filter Local Events & Announcements and view recommended events.
   
-- Set Credentials:
+Set Credentials:
    -	Username: admin
    -	Password: password123
-              OR 
+  
    -	Username: employee
    -	Password: employee123
  
-
-Report Issues
+***Report Issues***
 (From Part 1)
 - Allows users to submit municipal issues.
 - Fill in location, category, and description.
--	Attach an image or document and submit.
--	Confirmation messages show on successful submission.
+- Attach an image or document and submit.
+- Confirmation messages show on successful submission.
 
   
-Local Events and Announcements
+***Local Events and Announcements***
 (New for Part 2)
--	Displays a list of upcoming local events in an organised, card-style layout.
--	Admin: Add a title, choose if it’s an Announcement or Event, description, category, date and a photo (optional- if a photo is not added a default image will be used.)
--	Search Bar: Filter events by category or date.
+Displays a list of upcoming local events in an organised, card-style layout.
+Admin: Add a title, choose if it’s an Announcement or Event, description, category, date and a photo (optional- if a photo is not added a default image will be used.)
+Search Bar: Filter events by category or date.
   
--	Data Structures Used:
+Data Structures Used:
   -	SortedDictionary - sort events by date
   -	Dictionary - store event details for quick lookup
   -	HashSet - maintain unique categories and dates
   -	PriorityQueue - manage recent events by date
   -	HashTable- Record search frequency
     
--	Recommendation Feature: After a search, the system suggests related events based on user preferences using frequency tracking.
+Recommendation Feature: After a search, the system suggests related events based on user preferences using frequency tracking.
   
-- Technologies Used
+## Technologies Used
 - C# (.NET 8 / .NET Core MVC Framework)
 -	Razor Views / HTML / CSS / JavaScript
 -	Entity Framework Core (Database context)
