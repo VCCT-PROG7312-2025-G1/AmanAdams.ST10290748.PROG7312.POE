@@ -47,6 +47,15 @@ public class EventsController : Controller
     [HttpPost]
     public async Task<IActionResult> AddEvent(Event newEvent, IFormFile Photo)
     {
+
+        // Check for date conflict before saving
+        if (_service.IsDateConflict(newEvent.EventDate))
+        {
+            TempData["SearchMessage"] = "⚠️ An event already exists on this date. Please choose another date.";
+            return RedirectToAction("Events");
+        } 
+
+
         if (Photo != null && Photo.Length > 0)
         {
             var fileName = Path.GetFileName(Photo.FileName);

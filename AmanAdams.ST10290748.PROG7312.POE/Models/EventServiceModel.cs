@@ -72,8 +72,19 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
 
         public HashSet<DateTime> GetUniqueDates()
         {
+
             return new HashSet<DateTime>(_context.Events.Select(e => e.EventDate.Date));
         }
+
+        //poe part 3
+        // Checks if an event already exists on a specific date
+        public bool IsDateConflict(DateTime eventDate)
+        {
+            var uniqueDates = GetUniqueDates(); // HashSet<DateTime>
+            return uniqueDates.Contains(eventDate.Date);
+        }
+
+
 
         //PriorityQueue by date
         public PriorityQueue<Event, DateTime> GetPriorityQueue()

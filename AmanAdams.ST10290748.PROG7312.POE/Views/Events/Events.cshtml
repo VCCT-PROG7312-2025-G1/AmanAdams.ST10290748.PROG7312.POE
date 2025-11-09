@@ -19,6 +19,14 @@
     var loggedInUser = Context.Session.GetString("LoggedInUser");
 }
 
+@if (TempData["SearchMessage"] != null)
+{
+    <div id="search-tooltip" class="tooltip">@TempData["SearchMessage"]</div>
+    <script>
+        setTimeout(() => document.getElementById('search-tooltip').style.display = 'none', 3000);
+    </script>
+}
+
 @if (!string.IsNullOrEmpty(loggedInUser))
 {
 <!-- Add Event / Announcement Form -->
@@ -68,13 +76,7 @@ else
         <button type="submit" class="action-btn submit-btn">Search</button>
     </form>
 
-    @if (TempData["SearchMessage"] != null)
-    {
-        <div id="search-tooltip" class="tooltip">@TempData["SearchMessage"]</div>
-        <script>
-            setTimeout(() => document.getElementById('search-tooltip').style.display = 'none', 3000);
-        </script>
-    }
+    
 </div>
 
 <!-- Display Events -->
