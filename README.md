@@ -1,25 +1,7 @@
 ## Municipal Services Application for South Africa
-### Programming 3B Part 2
+### Programming 3B Part 3
 The Municipal Services Application is designed to streamline citizen interaction with municipal services in South Africa.
 
-### It allows users to:
-**1)	Report issues (Part 1)** 
-- Input a location.
-- Choose a category (Roads, Sanitation, Utilities, Safety, Other).
-- Enter a description.
-- You may optionally upload a file (photo or document).
-- A progress bar will update as you fill in the fields.
-- Click Submit to report the issue.
-
-**2)	View local events and announcements (Part 2)**
-- Adding and displaying local events and announcements.
-- Searching and filtering by category and date.
-- Sorting events by priority (date order).
-- Generating recommendations based on user search patterns.
-- Authentication for Admin/Employee login before adding events. 
-
-**3)	Track service-request status (to be implemented in Part 3)**
-This version focuses on collaboration and advanced data structures to manage and recommend local events efficiently.
 
 ### Prerequisites
 **Before compiling or running, ensure you have:**
@@ -29,7 +11,7 @@ This version focuses on collaboration and advanced data structures to manage and
    - .NET Framework 4.7.2 or later
 3.	A Windows PC environment
    
-**How to Compile the Application**
+**How to Compile and Run the Application**
 
 1. Clone the Repository
 
@@ -56,13 +38,12 @@ Visual Studio automatically restores required NuGet Packages
 
 ***Main Menu***
 
-Displays the three core features. And a login for the Staff/Employees.
+-	Displays the three core features. And a login for the Staff/Employees.
+-	Users should only be able to Report Issues, view and filter Local Events & Announcements by category or date and view recommended events and view their reported issues statuses (pending, in progress or resolved), search for reports by using Request IDs and view the report status graph.
+-	Admin, only once logged in, should be able to view the report issues page, add, view and filter Local Events & Announcements and view recommended events, view and edit the status of user submitted reports. They can also log out
 
-Users should only be able to Report Issues, view and filter Local Events & Announcements by category or date and view recommended events. 
-
-Admin, only once logged in, should be able to view the report issues page, add, view and filter Local Events & Announcements and view recommended events.
   
-Set Credentials:
+Set Login Credentials:
    -	Username: admin
    -	Password: password123
   
@@ -72,15 +53,19 @@ Set Credentials:
 ***Report Issues***
 
 (From Part 1)
-- Allows users to submit municipal issues.
-- Fill in location, category, and description.
-- Attach an image or document and submit.
-- Confirmation messages show on successful submission.
+Users report municipal problems with location, category, and description.
+-	Allows users to submit municipal issues.
+-	Fill in location, category, and description.
+-	Attach an image or document and submit.
+-	Confirmation messages show on successful submission.
+-	Generates a unique Request ID.
+-	Progress bar indicator.
+
 
   
 ***Local Events and Announcements***
 
-(New for Part 2)
+(From Part 2)
 
 Displays a list of upcoming local events in an organised, card-style layout.
 
@@ -97,13 +82,23 @@ Data Structures Used:
     
 Recommendation Feature: 
 
-After a search, the system suggests related events based on user preferences using frequency tracking.
+After a search, the system suggests related events based on user preferences using frequency tracking or events within +/- 7 days of the searched events. New announcement and events will be recommended as well.
+
+***Service Request Status***
+
+Displays all reported issues.
+
+- Users can search Reports by Request ID using Binary Search Trees (BST).
+- Admins and employees can update issue statuses (Pending, In Progress or Resolved).
+- Reports are ordered using Heaps (latest issues appear first), so that the user can see if their earliest reports have been addressed.
+- Report statuses are also displayed using Graphs, just to show the user exactly how many issued reports’ have been tended to. 
+
   
 ## Technologies Used
 - C# (.NET 8 / .NET Core MVC Framework)
 -	Razor Views / HTML / CSS / JavaScript
 -	Entity Framework Core (Database context)
--	SQLite LocalDB (for data storage)
+-	SQLite DB (for data storage)
 -	Visual Studio 2022 
 
 ### YouTube Video:
