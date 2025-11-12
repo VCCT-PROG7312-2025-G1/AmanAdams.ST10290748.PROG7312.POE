@@ -3,7 +3,7 @@
 // Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 2
+// POE PART 3
 
 namespace AmanAdams.ST10290748.PROG7312.POE.Models
 {
@@ -19,3 +19,4 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
         };
     }
 }
+//-------------------------------------------------------------END OF FILE-----------------------------------------------------------------//

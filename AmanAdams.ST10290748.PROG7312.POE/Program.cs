@@ -11,17 +11,22 @@ builder.Services.AddSession();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=events.db"));
 
+
+
 // Register EventServiceModel for dependency injection
 builder.Services.AddScoped<EventServiceModel>();
 
 var app = builder.Build();
 
-// Ensure the database and tables are created
+
+
+//  Ensure the database and tables are created (only once)
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated(); 
+    db.Database.EnsureCreated();
 }
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -43,5 +48,13 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.Run();
+try
+{
+    app.Run();
+}
+catch (Exception ex)
+{
+    Console.WriteLine(" Startup failed: " + ex.Message);
+    Console.WriteLine(ex.StackTrace);
+}
 

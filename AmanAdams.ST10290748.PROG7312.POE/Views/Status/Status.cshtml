@@ -1,71 +1,430 @@
-﻿@{
+﻿@model List<AmanAdams.ST10290748.PROG7312.POE.Models.IssueModel>
+
+@{
+    ViewData["Title"] = "Service Request Status";
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<h2 style="text-align:center; color:cadetblue;">Service Request Status</h2>
+
+
+
+
+@if (userRole == "Admin" || userRole == "Employee")
+{
+    <form asp-controller="Account" asp-action="Logout" method="post" class="bottom-left-logout">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+}
+<!-- Search Section -->
+<div class="search-events">
+    <h3>Search Request</h3>
+    <form asp-action="Search" asp-controller="Issues" method="post" class="search-bar-form">
+        <input type="text" name="requestId" placeholder="Enter your Request ID..." required />
+        <button type="submit" class="action-btn submit-btn">Search</button>
+    </form>
+</div>
+
+<!-- Success Tooltip -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="success-tooltip" class="tooltip">@TempData["SuccessMessage"]</div>
+    <script>
+        setTimeout(() => document.getElementById('success-tooltip').style.display = 'none', 3000);
+    </script>
+}
+<!-- Display Issues in Table -->
+<div class="event-list-full">
+    <h3>Reported Issues</h3>
+
+    <div class="graph-button-container">
+        <a asp-controller="Issues" asp-action="GraphView" class="graph-btn">View Graph Overview</a>
+    </div>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="issues-table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var issue in Model)
+                {
+                    <tr>
+                        <td>@issue.RequestId</td>
+                        <td>@issue.Category</td>
+                        <td>@issue.Description</td>
+                        <td>
+                            @{
+                                var role = Context.Session.GetString("UserRole");
+                            }
+
+                            @if (role == "Admin" || role == "Employee")
+                            {
+                                <form asp-action="UpdateStatus" asp-controller="Issues" method="post" style="display:flex; gap:5px;">
+                                    <input type="hidden" name="requestId" value="@issue.RequestId" />
+                                    <select name="status" style="padding:5px; border-radius:5px;">
+                                        <option value="Pending" selected="@(issue.Status == "Pending")">Pending</option>
+                                        <option value="In Progress" selected="@(issue.Status == "In Progress")">In Progress</option>
+                                        <option value="Resolved" selected="@(issue.Status == "Resolved")">Resolved</option>
+                                    </select>
+                                    <button type="submit" class="action-btn submit-btn" style="padding:5px 10px;">Update</button>
+
+                                </form>
+                            } 
+                            else
+                            {
+                                <span class="status-label @(issue.Status == "Resolved" ? "status-resolved" : "status-pending")">
+                                    @issue.Status
+                                </span>
+                            }
+                        </td>
+                        <td>@issue.CreatedAt.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <p style="text-align:center;">No reported issues found.</p>
+    }
+</div>
+
+<!-- Back Button -->
+<div class="form-buttons" style="text-align:center;">
+    <a asp-controller="Home" asp-action="Index" class="back-btn">Back to Main Menu</a>
+</div>
+
+
+@* @model List<AmanAdams.ST10290748.PROG7312.POE.Models.IssueModel>
+
+@{
     ViewData["Title"] = "Service Request Status";
 }
 
-<div class="coming-soon">
-    <h2>Service Request Status</h2>
-    <p>This feature is coming soon. You’ll be able to check the progress of your submitted requests here.</p>
+<h2 style="text-align:center; color:cadetblue;">Service Request Status</h2>
+
+<!-- Success Tooltip -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="success-tooltip" class="tooltip">@TempData["SuccessMessage"]</div>
+    <script>
+        setTimeout(() => document.getElementById('success-tooltip').style.display = 'none', 3000);
+    </script>
+}
+
+<!-- Search Section -->
+<div class="search-events">
+    <h3>Search Request</h3>
+    <form asp-action="Search" asp-controller="Issues" method="post" class="search-bar-form">
+        <input type="text" name="requestId" placeholder="Enter your Request ID..." required />
+        <button type="submit" class="action-btn submit-btn">Search</button>
+    </form>
 </div>
 
-<div class="form-buttons">
-    <a asp-controller="Home" asp-action="Index">
-        <button type="button" class="action-btn cancel-btn">Back to Main Menu</button>
-    </a>
+<!-- Display Issues in Table -->
+<div class="event-list-full">
+    <h3>Reported Issues</h3>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="issues-table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var issue in Model)
+                {
+                    <tr>
+                        <td>@issue.RequestId</td>
+                        <td>@issue.Category</td>
+                        <td>@issue.Description</td>
+                        <td>
+                            <span class="status-label @(issue.Status == "Resolved" ? "status-resolved" : "status-pending")">
+                                @issue.Status
+                            </span>
+                        </td>
+                        <td>@issue.CreatedAt.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="text-align:center;">No reported issues found.</p>
+    }
+</div> *@
+@* 
+<!-- Back Button -->
+<div class="form-buttons" style="text-align:center;">
+    <a asp-controller="Home" asp-action="Index" class="back-btn">Back to Main Menu</a>
+</div> *@
+
+
+@* 
+@model List<AmanAdams.ST10290748.PROG7312.POE.Models.IssueModel>
+
+@{
+    ViewData["Title"] = "Service Request Status";
+}
+
+<h2 style="text-align:center; color:cadetblue;">Service Request Status</h2>
+
+<!-- Success Tooltip -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="success-tooltip" class="tooltip">@TempData["SuccessMessage"]</div>
+    <script>
+        setTimeout(() => document.getElementById('success-tooltip').style.display = 'none', 3000);
+    </script>
+}
+
+<!-- Search Section -->
+<div class="search-events">
+    <h3>Search Request</h3>
+    <form asp-action="Search" asp-controller="Issues" method="post" class="search-bar-form">
+        <input type="text" name="requestId" placeholder="Enter your Request ID..." required />
+        <button type="submit" class="action-btn submit-btn">Search</button>
+    </form>
 </div>
+
+<!-- Display Issues in Table -->
+<div class="event-list-full">
+    <h3>Reported Issues</h3>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="issues-table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var issue in Model)
+                {
+                    <tr>
+                        <td>@issue.RequestId</td>
+                        <td>@issue.Category</td>
+                        <td>@issue.Description</td>
+                        <td>
+                            <span class="status-label @(issue.Status == "Resolved" ? "status-resolved" : "status-pending")">
+                                @issue.Status
+                            </span>
+                        </td>
+                        <td>@issue.CreatedAt.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="text-align:center;">No reported issues found.</p>
+    }
+</div>
+
+<!-- Back Button -->
+<div class="form-buttons" style="text-align:center;">
+    <a asp-controller="Home" asp-action="Index" class="back-btn">Back to Main Menu</a>
+</div>
+ *@
 
 <style>
-    .coming-soon {
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+    }
+
+    h3 {
+        color: cadetblue;
         text-align: center;
-        padding: 60px 20px;
     }
 
-        .coming-soon h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: cadetblue;
-        }
-
-        .coming-soon p {
-            font-size: 18px;
-            color: #555;
-        }
-
-    /* Flexbox for buttons */
-    .form-buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-top: 20px;
+    /* Tooltip */
+    .tooltip {
+        background-color: #4BB543;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        width: fit-content;
+        margin: 10px auto;
+        text-align: center;
     }
 
-    .action-btn {
-        flex: 1;
-        padding: 15px;
+    /* Top-left logout button on every page */
+    .bottom-left-logout {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1000; /* ensures it stays above other elements */
+    }
+
+    .logout-btn {
+        padding: 10px 20px;
+        border-radius: 50px; /* fully rounded */
         border: none;
-        border-radius: 12px;
-        font-size: 16px;
+        background-color: #ff4d4d;
+        color: white;
         font-weight: bold;
         cursor: pointer;
-        transition: transform 0.2s, opacity 0.2s;
-        color: #fff;
-        box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: background-color 0.2s, transform 0.2s;
     }
 
-        .action-btn:hover {
-            opacity: 1;
+        .logout-btn:hover {
+            background-color: #e60000;
             transform: scale(1.05);
         }
 
-    .submit-btn {
+    /* Search Section */
+    .search-events {
+        margin: 20px auto;
+        max-width: 600px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        background-color: #fff;
+    }
+
+    .search-bar-form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+        .search-bar-form input[type="text"] {
+            flex: 1 1 200px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+
+    .action-btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
         background-color: cadetblue;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.2s;
     }
 
-    .cancel-btn {
-        background-color: lightslategrey;
+        .action-btn:hover {
+            background-color: #3b8b8b;
+        }
+
+    /* Table Layout */
+    .event-list-full {
+        width: 95%;
+        max-width: 1400px;
+        margin: 30px auto;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: #fff;
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
     }
 
-    .report-form textarea {
-        resize: none;
+    .issues-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
     }
+
+        .issues-table th, .issues-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .issues-table th {
+            background-color: cadetblue;
+            color: white;
+        }
+
+        .issues-table tr:hover {
+            background-color: #f1f7f7;
+        }
+
+    /* Status Labels */
+    .status-label {
+        padding: 6px 12px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .status-pending {
+        background-color: darkorange;
+    }
+
+    .status-resolved {
+        background-color: seagreen;
+    }
+
+    /* Back Button */
+    .back-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        border-radius: 20px;
+        background: cadetblue;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        transition: transform 0.2s, background-color 0.2s;
+    }
+
+        .back-btn:hover {
+            background-color: #3b8b8b;
+            transform: scale(1.05);
+        }
+
+    .graph-button-container {
+        text-align: center;
+        margin: 10px 20px;
+    }
+
+    .graph-btn {
+        display: inline-block;
+        background-color: cadetblue;
+        color: white;
+        font-weight: bold;
+        padding: 10px 25px;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .graph-btn:hover {
+            background-color: #3b8b8b;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
 </style>
-
+ 

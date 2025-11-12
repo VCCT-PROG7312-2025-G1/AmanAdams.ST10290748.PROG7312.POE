@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 // Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 2
+// POE PART 3
 
 namespace AmanAdams.ST10290748.PROG7312.POE.Controllers
 {
@@ -21,23 +21,31 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            if (_loginService.ValidateUser(username, password))
+            // Only Admin and Employee are valid
+            if (_loginService.ValidateUser(username, password, out string role))
             {
                 HttpContext.Session.SetString("LoggedInUser", username);
-                return RedirectToAction("Events", "Events");
+                HttpContext.Session.SetString("UserRole", role);
+
+
+                // Redirect admins to Service Request Status
+                return RedirectToAction("Index", "Home");
             }
 
+            TempData["ErrorMessage"] = "Invalid username or password.";
             ViewBag.Error = "Invalid username or password. Please try again.";
-            return View();
+                        return View();
         }
 
+        [HttpPost]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            TempData["SuccessMessage"] = "You have been logged out.";
+            return RedirectToAction("Index", "Home");
         }
-
-     
     }
 }
+
+//-------------------------------------------------------------END OF FILE-----------------------------------------------------------------//
 

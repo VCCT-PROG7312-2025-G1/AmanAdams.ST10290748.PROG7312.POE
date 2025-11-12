@@ -6,7 +6,7 @@ using System.Linq;
 // Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 2
+// POE PART 3
 
 public class EventsController : Controller
 {
@@ -22,7 +22,7 @@ public class EventsController : Controller
     {
         var allEvents = _service.GetAllEvents();
 
-        //Default recommendations (e.g., most recent or featured)
+        //Default recommendations (most recent)
         var recommendations = allEvents
             .OrderByDescending(e => e.EventDate)
             .Take(4) 
@@ -51,7 +51,7 @@ public class EventsController : Controller
         // Check for date conflict before saving
         if (_service.IsDateConflict(newEvent.EventDate))
         {
-            TempData["SearchMessage"] = "⚠️ An event already exists on this date. Please choose another date.";
+            TempData["SearchMessage"] = " An event already exists on this date. Please choose another date.";
             return RedirectToAction("Events");
         } 
 
@@ -104,5 +104,6 @@ public class EventsController : Controller
 }
 
 
+//-------------------------------------------------------------END OF FILE-----------------------------------------------------------------//
 
 

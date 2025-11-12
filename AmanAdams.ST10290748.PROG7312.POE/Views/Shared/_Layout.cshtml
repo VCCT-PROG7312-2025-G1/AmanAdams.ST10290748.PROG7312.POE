@@ -108,6 +108,7 @@
 
 
 <style>
+
     body {
         font-family: Arial, Helvetica, sans-serif;
         margin: 0;
@@ -231,63 +232,5 @@
 
 
 
-@* <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Municipal Services</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-</head>
-<body>
-    <!-- Top Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">South African Municipal Services</div>
-            <ul class="nav-links">
-                <li>
-                    <a asp-controller="Home" asp-action="Index"
-                       class="@(ViewData["Title"]?.ToString() == "Main Menu" ? "active" : "")">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Issues" asp-action="Report"
-                       class="@(ViewData["Title"]?.ToString() == "Report an Issue" ? "active" : "")">
-                        Report Issues
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Events" asp-action="Events"
-                       class="@(ViewData["Title"]?.ToString() == "Local Events And Announcements" ? "active" : "")">
-                        Local Events And Announcements
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Status" asp-action="Status"
-                       class="@(ViewData["Title"]?.ToString() == "Service Request Status" ? "active" : "")">
-                        Service Request Status
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Render Page Content -->
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <hr />
-        <p>&copy; @DateTime.Now.Year - South African Municipality</p>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html> *@
 

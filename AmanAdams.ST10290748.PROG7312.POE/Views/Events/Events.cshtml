@@ -6,6 +6,18 @@
 
 <h2 style="text-align:center; color:cadetblue;">Local Events and Announcements</h2>
 
+@{
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+@if (userRole == "Admin" || userRole == "Employee")
+{
+    <form asp-controller="Account" asp-action="Logout" method="post" class="bottom-left-logout">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+}
+
+
 <!-- Success Tooltip (Chatgpt) -->
 @if (TempData["SuccessMessage"] != null)
 {
@@ -181,6 +193,30 @@ else
             background-color: #3b8b8b;
         }
 
+    /* Top-left logout button on every page */
+    .bottom-left-logout {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1000; /* ensures it stays above other elements */
+    }
+
+    .logout-btn {
+        padding: 10px 20px;
+        border-radius: 50px; /* fully rounded */
+        border: none;
+        background-color: #ff4d4d;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: background-color 0.2s, transform 0.2s;
+    }
+
+        .logout-btn:hover {
+            background-color: #e60000;
+            transform: scale(1.05);
+        }
     /* Search Bar */
     .search-bar-form {
         display: flex;

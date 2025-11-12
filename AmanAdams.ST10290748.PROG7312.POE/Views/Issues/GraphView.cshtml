@@ -1,0 +1,149 @@
+﻿@model List<AmanAdams.ST10290748.PROG7312.POE.Models.IssueModel>
+
+@{
+    ViewData["Title"] = "Issue Status Graph";
+
+    // Count issues by status
+    var statusCounts = new Dictionary<string, int>
+    {
+        { "Pending", Model?.Count(i => i.Status == "Pending") ?? 0 },
+        { "In Progress", Model?.Count(i => i.Status == "In Progress") ?? 0 },
+        { "Resolved", Model?.Count(i => i.Status == "Resolved") ?? 0 }
+    };
+}
+
+<h2 style="text-align:center; color:cadetblue; margin-top:30px;">Service Request Status Overview</h2>
+
+<div class="graph-container">
+    <div class="graph-card">
+        <canvas id="statusGraphCanvas"></canvas>
+    </div>
+</div>
+
+<!-- Back Button -->
+<div style="text-align:center; margin-top:40px;">
+    <a asp-controller="Status" asp-action="Status" class="back-btn">Back to Service Requests</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const statusCounts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(statusCounts));
+    const statuses = Object.keys(statusCounts);
+    const counts = Object.values(statusCounts);
+
+    const ctx = document.getElementById('statusGraphCanvas').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: statuses,
+            datasets: [{
+                label: 'Number of Issues',
+                data: counts,
+                borderWidth: 2,
+                borderColor: ['rgba(255,165,0,0.9)','rgba(30,144,255,0.9)','rgba(34,139,34,0.9)'],
+                backgroundColor: ['rgba(255,165,0,0.5)','rgba(30,144,255,0.5)','rgba(34,139,34,0.5)'],
+                borderRadius: 12
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Issues by Status', color: 'cadetblue', font: { size: 18, weight: 'bold' } }
+            },
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Count', color: '#666', font: { size: 14 } } },
+                x: { title: { display: true, text: 'Status', color: '#666', font: { size: 14 } } }
+            }
+        }
+    });
+</script>
+
+<style>
+    .graph-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+    }
+
+    .graph-card {
+        width: 90%;
+        max-width: 700px;
+        background-color: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+        width: 100% !important;
+        height: 400px !important;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        border-radius: 25px;
+        background-color: cadetblue;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: transform 0.2s, background-color 0.2s;
+    }
+
+        .back-btn:hover {
+            background-color: #3b8b8b;
+            transform: scale(1.05);
+        }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        color: cadetblue;
+        margin-bottom: 30px;
+    }
+
+    .graph-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+    }
+
+    .graph-card {
+        width: 90%;
+        max-width: 900px;
+        background-color: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+        width: 100% !important;
+        height: 450px !important;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        border-radius: 25px;
+        background-color: cadetblue;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: transform 0.2s, background-color 0.2s;
+    }
+
+        .back-btn:hover {
+            background-color: #3b8b8b;
+            transform: scale(1.05);
+        }
+</style>

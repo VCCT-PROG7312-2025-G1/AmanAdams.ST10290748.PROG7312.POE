@@ -7,7 +7,7 @@ using System.Linq;
 // Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 2 
+// POE PART 3
 
 namespace AmanAdams.ST10290748.PROG7312.POE.Models
 {
@@ -76,11 +76,11 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
             return new HashSet<DateTime>(_context.Events.Select(e => e.EventDate.Date));
         }
 
-        //poe part 3
+        
         // Checks if an event already exists on a specific date
         public bool IsDateConflict(DateTime eventDate)
         {
-            var uniqueDates = GetUniqueDates(); // HashSet<DateTime>
+            var uniqueDates = GetUniqueDates(); 
             return uniqueDates.Contains(eventDate.Date);
         }
 
@@ -164,7 +164,7 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
                 .Where(e => matchedCategories.Contains(e.Category) && !currentResults.Contains(e))
                 .Take(4));
 
-            //If searching by date, recommend events within ±7 days
+            //If searching by date, recommend events within 7 days +/-
             if (eventDate.HasValue)
             {
                 recommendations.AddRange(allEvents
@@ -188,6 +188,7 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
 
 
 
+//-------------------------------------------------------------END OF FILE-----------------------------------------------------------------//
 
 
 

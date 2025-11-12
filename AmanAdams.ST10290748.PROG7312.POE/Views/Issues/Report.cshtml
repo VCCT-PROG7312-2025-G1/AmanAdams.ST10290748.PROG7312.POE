@@ -1,12 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Report an Issue";
+﻿﻿@{
+ViewData["Title"] = "Report an Issue";
 }
 
 <div class="container">
     <h3>Report an Issue</h3>
     <hr />
 
-  
+
 
     <form asp-action="Report" asp-controller="Issues" method="post" enctype="multipart/form-data" class="report-form">
         <label for="location"><b>Location</b></label>
@@ -31,7 +31,7 @@
         <!-- Progress Bar -->
         <label for="progress bar"><b>Progress Bar</b></label>
         <div class="progress-container">
-           
+
             <div id="progress-bar"></div>
         </div>
         <p id="progress-text">0% Complete</p>
@@ -189,4 +189,3 @@
         input.addEventListener("change", updateProgress);
     });
 </script>
-

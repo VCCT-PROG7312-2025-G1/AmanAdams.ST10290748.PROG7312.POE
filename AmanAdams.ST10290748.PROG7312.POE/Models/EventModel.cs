@@ -1,7 +1,7 @@
 ﻿// Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 2
+// POE PART 3
 
 namespace AmanAdams.ST10290748.PROG7312.POE.Models
 
@@ -14,9 +14,9 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
         public string Category { get; set; }
         public string Type { get; set; }  // "Event" or "Announcement"
         public DateTime EventDate { get; set; }
-        public string PhotoPath { get; set; } 
-                                                // Path to uploaded photo
+        public string PhotoPath { get; set; } // Path to uploaded photo
+                                                
     }
 
-
 }
+//-------------------------------------------------------------END OF FILE-----------------------------------------------------------------//

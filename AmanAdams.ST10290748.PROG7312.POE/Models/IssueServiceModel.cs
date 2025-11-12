@@ -1,16 +1,24 @@
 ﻿
+using System.Linq;
+
 // Aman Adams
 // ST10290748
 // PROG7312
-// POE PART 2
+// POE PART 3
+
 
 namespace AmanAdams.ST10290748.PROG7312.POE.Models
 {
     public class IssueServiceModel
     {
-        private readonly IssueRepositoryModel _repo = new();
+        private readonly IssueRepositoryModel _repo;
 
-        public void ReportIssue(string location, IssueCategory category, string description, string attachment)
+        public IssueServiceModel(IssueRepositoryModel repo)
+        {
+            _repo = repo;
+        }
+
+        public IssueModel ReportIssue(string location, IssueCategory category, string description, string attachment)
         {
             var issue = new IssueModel
             {
@@ -19,9 +27,17 @@ namespace AmanAdams.ST10290748.PROG7312.POE.Models
                 Description = description,
                 AttachmentPath = attachment
             };
+
             _repo.AddIssue(issue);
+            return issue;
+        }
+
+        public IssueModel? GetIssueByRequestId(string requestId)
+        {
+            return _repo.GetIssueByRequestId(requestId);
         }
 
         public IEnumerable<IssueModel> GetAllIssues() => _repo.GetAllIssues();
     }
 }
+//-------------------------------------------------------------END OF FILE-----------------------------------------------------------------//

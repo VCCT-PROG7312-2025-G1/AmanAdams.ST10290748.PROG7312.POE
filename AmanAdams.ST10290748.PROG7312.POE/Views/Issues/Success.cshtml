@@ -3,11 +3,10 @@
 }
 
 <div class="container success-container">
-    <h3>Issue Submitted Successfully</h3>
-    <hr />
-
-    <p>Thank you for reporting the issue. Your submission has been recorded and will be reviewed by the municipality.</p>
-
+    <h2 style="color:cadetblue;">Issue Submitted Successfully!</h2>
+    <p>Your report has been logged successfully.</p>
+    <p><strong>Your Request ID:</strong> <span style="color:cadetblue;">@ViewBag.RequestId</span></p>
+    <p>Use this ID to check the progress in the Service Request Status page.</p>
     <div class="form-buttons">
         <a asp-controller="Home" asp-action="Index" class="action-btn submit-btn">
             Return to Main Menu
@@ -82,107 +81,3 @@
 </style>
 
 
-@* @{
-    ViewData["Title"] = "Success";
-}
-
-<div class="container">
-    <h3>Issue Submitted Successfully</h3>
-    <hr />
-
-    <p>Thank you for reporting the issue. Your submission has been recorded.</p>
-
-    <a asp-controller="Home" asp-action="Index">
-        <button type="button" class="signupbtn">Return to Main Menu</button>
-    </a>
-</div>
-
-
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    hr {
-        border: 1px solid #f1f1f1;
-        margin-bottom: 25px;
-    }
-
-    .container {
-        padding: 20px;
-        max-width: 700px;
-        margin: auto;
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .report-form label {
-        display: block;
-        margin: 10px 0 5px;
-        font-weight: bold;
-    }
-
-    .report-form input[type=text],
-    .report-form input[type=file],
-    .report-form select,
-    .report-form textarea {
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        background: #f9f9f9;
-        transition: border-color 0.2s, background 0.2s;
-    }
-
-        .report-form input:focus,
-        .report-form select:focus,
-        .report-form textarea:focus {
-            border-color: cadetblue;
-            background: #eef7f7;
-            outline: none;
-        }
-
-    /* Flexbox for buttons */
-    .form-buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .action-btn {
-        flex: 1;
-        padding: 15px;
-        border: none;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s, opacity 0.2s;
-        color: #fff;
-        box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
-    }
-
-        .action-btn:hover {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-    .submit-btn {
-        background-color: cadetblue;
-    }
-
-    .cancel-btn {
-        background-color: lightslategrey;
-    }
-
-    .report-form textarea {
-        resize: none;
-    }
-</style> *@
